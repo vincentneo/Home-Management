@@ -9,4 +9,8 @@ target 'Home Management' do
   pod 'Alamofire', '~> 5.5'
   pod 'SwiftyJSON', '~> 4.0'
 
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Auth'
+  pod 'GoogleSignIn'
+
 end

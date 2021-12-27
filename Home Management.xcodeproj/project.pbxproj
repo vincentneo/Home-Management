@@ -11,6 +11,9 @@
 		27DAE572277893930083567A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAE571277893930083567A /* ContentView.swift */; };
 		27DAE574277893940083567A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27DAE573277893940083567A /* Assets.xcassets */; };
 		27DAE577277893940083567A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27DAE576277893940083567A /* Preview Assets.xcassets */; };
+		27F292D12778980D0083C949 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27F292D02778980D0083C949 /* GoogleService-Info.plist */; };
+		27F292D527789EC20083C949 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F292D427789EC20083C949 /* LoginView.swift */; };
+		27F292D72778A2E60083C949 /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F292D62778A2E60083C949 /* HomePageView.swift */; };
 		C69C4F9B4EAB4599D7C31592 /* Pods_Home_Management.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61DC9A263810B7AA8733C046 /* Pods_Home_Management.framework */; };
 /* End PBXBuildFile section */
 
@@ -22,6 +25,11 @@
 		27DAE571277893930083567A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		27DAE573277893940083567A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27DAE576277893940083567A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		27F292D02778980D0083C949 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		27F292D2277898400083C949 /* Home Management.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Home Management.entitlements"; sourceTree = "<group>"; };
+		27F292D427789EC20083C949 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		27F292D62778A2E60083C949 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
+		27F292D82778A4F20083C949 /* Home-Management-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Home-Management-Info.plist"; sourceTree = SOURCE_ROOT; };
 		61DC9A263810B7AA8733C046 /* Pods_Home_Management.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Home_Management.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -58,8 +66,13 @@
 		27DAE56E277893930083567A /* Home Management */ = {
 			isa = PBXGroup;
 			children = (
+				27F292D82778A4F20083C949 /* Home-Management-Info.plist */,
+				27F292D2277898400083C949 /* Home Management.entitlements */,
+				27F292D02778980D0083C949 /* GoogleService-Info.plist */,
 				27DAE56F277893930083567A /* Home_ManagementApp.swift */,
 				27DAE571277893930083567A /* ContentView.swift */,
+				27F292D92778A8FE0083C949 /* Controller */,
+				27F292D327789EB80083C949 /* View */,
 				27DAE573277893940083567A /* Assets.xcassets */,
 				27DAE575277893940083567A /* Preview Content */,
 			);
@@ -72,6 +85,22 @@
 				27DAE576277893940083567A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		27F292D327789EB80083C949 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				27F292D427789EC20083C949 /* LoginView.swift */,
+				27F292D62778A2E60083C949 /* HomePageView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		27F292D92778A8FE0083C949 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		3B9F56EC9DFC68F1CB8AD4C5 /* Frameworks */ = {
@@ -88,7 +117,6 @@
 				1DB89BE44AA6C5DBC4EAF7DC /* Pods-Home Management.debug.xcconfig */,
 				236BF14B793BF47368067D7F /* Pods-Home Management.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -154,6 +182,7 @@
 			files = (
 				27DAE577277893940083567A /* Preview Assets.xcassets in Resources */,
 				27DAE574277893940083567A /* Assets.xcassets in Resources */,
+				27F292D12778980D0083C949 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,7 +235,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27F292D527789EC20083C949 /* LoginView.swift in Sources */,
 				27DAE572277893930083567A /* ContentView.swift in Sources */,
+				27F292D72778A2E60083C949 /* HomePageView.swift in Sources */,
 				27DAE570277893930083567A /* Home_ManagementApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,15 +367,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Home Management/Home Management.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Home Management/Preview Content\"";
-				DEVELOPMENT_TEAM = 4NW8BVU7Z5;
+				DEVELOPMENT_TEAM = 5678544286;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Home-Management-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -352,7 +386,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "BaBaSaMa.Home-Management";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.BaBaSaMa.Home-Management";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -366,15 +400,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Home Management/Home Management.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Home Management/Preview Content\"";
-				DEVELOPMENT_TEAM = 4NW8BVU7Z5;
+				DEVELOPMENT_TEAM = 5678544286;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Home-Management-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -382,7 +419,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "BaBaSaMa.Home-Management";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.BaBaSaMa.Home-Management";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

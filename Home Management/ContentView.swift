@@ -8,14 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var login_required = false
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
-    }
-}
+        VStack {
+            
+        }
+        .onAppear {
+            check_login()
+        }
+        .sheet(isPresented: $login_required) {
+            login_required = false
+        } content: {
+            LoginView()
+                .navigationTitle("Login")
+        }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+    }
+    
+    private func check_login() {
+        let defaults = UserDefaults.standard
+        let user_id = defaults.string(forKey: "user_id")
+        if user_id == nil {
+            login_required = true
+        }
     }
 }
