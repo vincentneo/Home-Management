@@ -72,13 +72,12 @@ struct ContentView: View {
             check_login()
         }
         .onChange(of: login_required, perform: { newValue in
-            print("lg_r \(newValue)")
-            //check_login()
+            check_login()
         })
         .sheet(isPresented: $login_required) {
             login_required = false
         } content: {
-            LoginView(shouldShowSheet: $login_required)
+            LoginView()
         }
     }
     

@@ -19,7 +19,6 @@ import GoogleSignIn
 
 class LoginManager : ObservableObject {
     var viewController : UIViewController?
-    @Published var auth: (uid: String, displayName: String)?
     
     func runLogin() {
         guard let viewController = viewController else {
@@ -50,7 +49,14 @@ class LoginManager : ObservableObject {
                 guard let user = authResult?.user else { return }
                 let uid = user.uid
                 let displayName = user.displayName
-                self.auth = (uid, displayName ?? "")
+                
+                Task {
+                    await login(uid, displayName ?? "")
+                    
+                    await viewController.dismiss(animated: true) {
+                        print("dismissed")
+                    }
+                }
             }
         }
     }
@@ -71,9 +77,6 @@ struct DummyViewController : UIViewControllerRepresentable {
 }
 
 struct LoginView: View {
-    
-    @Binding var shouldShowSheet: Bool
-    
     @State var currentNonce: String?
     @State private var displayname: String = ""
     @State private var email: String = ""
@@ -125,33 +128,17 @@ struct LoginView: View {
                                         .stroke(isDarkMode ? Color.white: Color.black, lineWidth: 2))
                             .padding(.vertical, 5)
                         Button {
-                            if newAccount {
-                                Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-                                    guard let user = authResult?.user else { return }
-                                    let uid = user.uid
-                                    Task {
-                                        if newAccount {
-                                            await login(uid, displayname)
-                                        } else {
-                                            await login(uid, "")
-                                        }
-                                        
-                                        await presentationMode.wrappedValue.dismiss()
+                            Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+                                guard let user = authResult?.user else { return }
+                                let uid = user.uid
+                                Task {
+                                    if newAccount {
+                                        await login(uid, displayname)
+                                    } else {
+                                        await login(uid, "")
                                     }
-                                }
-                            } else {
-                                Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-                                    guard let user = authResult?.user else { return }
-                                    let uid = user.uid
-                                    Task {
-                                        if newAccount {
-                                            await login(uid, displayname)
-                                        } else {
-                                            await login(uid, "")
-                                        }
-                                        
-                                        await presentationMode.wrappedValue.dismiss()
-                                    }
+                                    
+                                    await presentationMode.wrappedValue.dismiss()
                                 }
                             }
                         } label: {
@@ -211,7 +198,7 @@ struct LoginView: View {
                                         Task {
                                             await login(uid, displayName ?? "")
                                             
-                                            //await presentationMode.wrappedValue.dismiss()
+                                            await presentationMode.wrappedValue.dismiss()
                                         }
                                     }
                                 default:
@@ -276,12 +263,6 @@ struct LoginView: View {
             .frame(alignment: .center)
             .navigationTitle(Text("Login / Register"))
         }
-        .onReceive(loginManager.$auth, perform: { auth in
-            guard let auth = auth else { return }
-            Task {
-                await self.login(auth.uid, auth.displayName)
-            }
-        })
         .onAppear {
             if colorScheme == .dark {
                 isDarkMode = true
@@ -296,7 +277,7 @@ struct LoginView: View {
                     Task {
                         await login(uid, ("User " + String(Int.random(in: 1111..<9999))))
                         
-                        //await presentationMode.wrappedValue.dismiss()
+                        await presentationMode.wrappedValue.dismiss()
                     }
                 }
             }
@@ -346,76 +327,74 @@ struct LoginView: View {
         
         return result
     }
-    
-    func login(_ uid: String, _ display_name: String) async {
-        var login_parameter = JSON()
-        login_parameter["user_id"].string = uid
-        login_parameter["display_name"].string = display_name
-        
-        let defaults = UserDefaults.standard
-        
-        AF.request("https://api.babasama.com/home_management/auth/login", method: .get, parameters: login_parameter).response { response in
-            switch response.result {
-            case .success(let value):
-                let json_response = JSON(value)
-                if json_response["output"].stringValue == "success" {
-                    defaults.set("\(uid)", forKey: "user_id")
-                    defaults.set("\(display_name)", forKey: "display_name")
-                    shouldShowSheet = false
-                    return
-                } else if json_response["output"].stringValue == "retry" {
-                    switch json_response["where_to"].stringValue {
-                    case "register":
-                        Task {
-                            await register(uid, display_name)
-                        }
-                        return
-                    default:
-                        debugPrint(json_response)
-                    }
-                } else {
-                    debugPrint(json_response)
-                }
-                
-            case .failure(_):
-                debugPrint(response)
-            }
-            
-        }
-    }
+}
 
-    func register(_ uid: String, _ display_name: String) async {
-        
-        let login_parameter = ["user_id": uid, "display_name": display_name]
-        let defaults = UserDefaults.standard
-        
-        AF.request("https://api.babasama.com/home_management/auth/register", method: .post, parameters: login_parameter, encoder: JSONParameterEncoder.default, headers: HTTPHeaders.init(["Content-Type": "application/json"])).response { response in
-            switch response.result {
-            case .success(let value):
-                let json_response = JSON(value)
-                if json_response["output"].stringValue == "success" {
-                    defaults.set("\(uid)", forKey: "user_id")
-                    defaults.set("\(display_name)", forKey: "display_name")
-                    shouldShowSheet = false
-                    return
-                } else if json_response["output"].stringValue == "retry" {
-                    switch json_response["where_to"].stringValue {
-                    case "login":
-                        Task {
-                            await login(uid, display_name)
-                        }
-                        
-                    default:
-                        debugPrint(json_response)
+func login(_ uid: String, _ display_name: String) async {
+    var login_parameter = JSON()
+    login_parameter["user_id"].string = uid
+    login_parameter["display_name"].string = display_name
+    
+    let defaults = UserDefaults.standard
+    
+    AF.request("https://api.babasama.com/home_management/auth/login", method: .get, parameters: login_parameter).response { response in
+        switch response.result {
+        case .success(let value):
+            let json_response = JSON(value)
+            if json_response["output"].stringValue == "success" {
+                defaults.set("\(uid)", forKey: "user_id")
+                defaults.set("\(display_name)", forKey: "display_name")
+                return
+            } else if json_response["output"].stringValue == "retry" {
+                switch json_response["where_to"].stringValue {
+                case "register":
+                    Task {
+                        await register(uid, display_name)
                     }
-                } else {
+                    return
+                default:
                     debugPrint(json_response)
                 }
-                
-            case .failure(_):
-                debugPrint(response)
+            } else {
+                debugPrint(json_response)
             }
             
+        case .failure(_):
+            debugPrint(response)
         }
+        
+    }
+}
+
+func register(_ uid: String, _ display_name: String) async {
+    
+    let login_parameter = ["user_id": uid, "display_name": display_name]
+    let defaults = UserDefaults.standard
+    
+    AF.request("https://api.babasama.com/home_management/auth/register", method: .post, parameters: login_parameter, encoder: JSONParameterEncoder.default, headers: HTTPHeaders.init(["Content-Type": "application/json"])).response { response in
+        switch response.result {
+        case .success(let value):
+            let json_response = JSON(value)
+            if json_response["output"].stringValue == "success" {
+                defaults.set("\(uid)", forKey: "user_id")
+                defaults.set("\(display_name)", forKey: "display_name")
+                return
+            } else if json_response["output"].stringValue == "retry" {
+                switch json_response["where_to"].stringValue {
+                case "login":
+                    Task {
+                        await login(uid, display_name)
+                    }
+                    
+                default:
+                    debugPrint(json_response)
+                }
+            } else {
+                debugPrint(json_response)
+            }
+            
+        case .failure(_):
+            debugPrint(response)
+        }
+        
     }
 }
