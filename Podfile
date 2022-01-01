@@ -8,6 +8,8 @@ target 'Home Management' do
   # Pods for Home Management
   pod 'Alamofire', '~> 5.5'
   pod 'SwiftyJSON', '~> 4.0'
+  pod 'AlertToast'
+  pod 'Drops', :git => 'https://github.com/omaralbeik/Drops.git', :tag => '1.4.0'
 
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'

@@ -63,4 +63,3 @@ struct RoundedCorners: Shape {
         return path
     }
 }
-
