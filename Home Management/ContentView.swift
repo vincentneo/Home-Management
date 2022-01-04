@@ -6,83 +6,54 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseAuth
 
 struct ContentView: View {
     @State private var login_required: Bool = false
-    @State private var isDarkMode: Bool = false
-    @State private var search_item: String = ""
     let defaults = UserDefaults.standard
     
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
-        NavigationView {
-            VStack {
-                VStack {
-                    HStack {
-                        Text("Category")
-                            .font(.title3)
-                            .fontWeight(.medium)
-                        Spacer()
-                        Button {
-                            
-                        } label: {
-                            Text("View All")
-                                .font(.caption)
-                                .fontWeight(.regular)
-                                .foregroundColor(Color.black)
-                        }
-                    }
-                    .padding(.horizontal, 15)
-                    .frame(width: maxWidth * 0.8, height: 40, alignment: .center)
-                    HStack {
-                        VStack {
-                            Image("groceries_icon")
-                                .resizable()
-                                .frame(width: 40, height: 40, alignment: .center)
-
-                            Text("Groceries")
-                        }
-                        .frame(width: 100, height: 100, alignment: .center)
-                        .background(RoundedCorners(tl: 5, tr: 5, bl: 5, br: 5)
-                                        .fill(Color.init(hue: 2.10, saturation: 0.06, brightness: 0.85)))
-                    }
-                    .frame(width: maxWidth, height: 100, alignment: .bottom)
+        TabView {
+            HomePageView()
+                .tabItem {
+                    Image(systemName: "house.circle")
+                    Text("Home")
                 }
-                .padding(.horizontal, 15)
-                .frame(width: maxWidth * 0.8, height: 40, alignment: .center)
-            }
-            .navigationTitle("Welcome \(defaults.string(forKey: "display_name") ?? "User")")
-            .toolbar {
-                Button {
-                    print("pressed")
-                } label: {
-                    Image(systemName: "bell.badge.fill")
-                        .foregroundColor(isDarkMode ? Color.white : Color.black)
+                .tag(0)
+                .tint(Color.black)
+            AddItemPageView()
+                .tabItem {
+                    Image(systemName: "plus.circle")
+                    Text("Add")
                 }
-
-            }
-            .frame(width: maxWidth, height: maxHeight)
+                .tag(1)
+                .tint(Color.black)
+            SettingsPageView(login_required: $login_required)
+                .tabItem {
+                    Image(systemName: "gear.circle")
+                    Text("Settings")
+                }
+                .tag(2)
         }
-        .searchable(text: $search_item)
-        .onAppear {
-            if (colorScheme == .dark) {
-                
-            }
+        .onAppear(perform: {
             check_login()
-        }
+        })
         .onChange(of: login_required, perform: { newValue in
             check_login()
         })
         .sheet(isPresented: $login_required) {
             login_required = false
         } content: {
-            LoginView()
+            LoginView(shouldShowSheet: $login_required)
         }
     }
     
     private func check_login() {
         let user_id = defaults.string(forKey: "user_id")
+        print("user id: \(user_id)")
         if user_id == nil {
             login_required = true
             return;

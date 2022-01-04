@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27262E6127817B31004D6B6C /* AddItemPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27262E6027817B31004D6B6C /* AddItemPageView.swift */; };
+		27262E6327819313004D6B6C /* SettingsPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27262E6227819313004D6B6C /* SettingsPageView.swift */; };
+		27262E65278197FC004D6B6C /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27262E64278197FC004D6B6C /* Home.swift */; };
 		2764C6DE277F3BFC003346C1 /* AlertData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764C6DD277F3BFC003346C1 /* AlertData.swift */; };
+		27CDDBDF2782ED86003CBCB8 /* InviteUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CDDBDE2782ED86003CBCB8 /* InviteUsers.swift */; };
+		27CDDBE12782F1D4003CBCB8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CDDBE02782F1D4003CBCB8 /* User.swift */; };
+		27CDDBE3278306FC003CBCB8 /* AddHomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CDDBE2278306FC003CBCB8 /* AddHomePageView.swift */; };
 		27DAE570277893930083567A /* Home_ManagementApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAE56F277893930083567A /* Home_ManagementApp.swift */; };
 		27DAE572277893930083567A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAE571277893930083567A /* ContentView.swift */; };
 		27DAE574277893940083567A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27DAE573277893940083567A /* Assets.xcassets */; };
@@ -21,7 +27,13 @@
 /* Begin PBXFileReference section */
 		1DB89BE44AA6C5DBC4EAF7DC /* Pods-Home Management.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Home Management.debug.xcconfig"; path = "Target Support Files/Pods-Home Management/Pods-Home Management.debug.xcconfig"; sourceTree = "<group>"; };
 		236BF14B793BF47368067D7F /* Pods-Home Management.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Home Management.release.xcconfig"; path = "Target Support Files/Pods-Home Management/Pods-Home Management.release.xcconfig"; sourceTree = "<group>"; };
+		27262E6027817B31004D6B6C /* AddItemPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemPageView.swift; sourceTree = "<group>"; };
+		27262E6227819313004D6B6C /* SettingsPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageView.swift; sourceTree = "<group>"; };
+		27262E64278197FC004D6B6C /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		2764C6DD277F3BFC003346C1 /* AlertData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertData.swift; sourceTree = "<group>"; };
+		27CDDBDE2782ED86003CBCB8 /* InviteUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteUsers.swift; sourceTree = "<group>"; };
+		27CDDBE02782F1D4003CBCB8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		27CDDBE2278306FC003CBCB8 /* AddHomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHomePageView.swift; sourceTree = "<group>"; };
 		27DAE56C277893930083567A /* Home Management.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Home Management.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27DAE56F277893930083567A /* Home_ManagementApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home_ManagementApp.swift; sourceTree = "<group>"; };
 		27DAE571277893930083567A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -94,6 +106,10 @@
 			children = (
 				27F292D427789EC20083C949 /* LoginView.swift */,
 				27F292D62778A2E60083C949 /* HomePageView.swift */,
+				27262E6027817B31004D6B6C /* AddItemPageView.swift */,
+				27CDDBE2278306FC003CBCB8 /* AddHomePageView.swift */,
+				27CDDBDE2782ED86003CBCB8 /* InviteUsers.swift */,
+				27262E6227819313004D6B6C /* SettingsPageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -102,6 +118,8 @@
 			isa = PBXGroup;
 			children = (
 				2764C6DD277F3BFC003346C1 /* AlertData.swift */,
+				27262E64278197FC004D6B6C /* Home.swift */,
+				27CDDBE02782F1D4003CBCB8 /* User.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -238,10 +256,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27CDDBDF2782ED86003CBCB8 /* InviteUsers.swift in Sources */,
 				27F292D527789EC20083C949 /* LoginView.swift in Sources */,
+				27262E6127817B31004D6B6C /* AddItemPageView.swift in Sources */,
+				27CDDBE3278306FC003CBCB8 /* AddHomePageView.swift in Sources */,
 				27DAE572277893930083567A /* ContentView.swift in Sources */,
+				27262E6327819313004D6B6C /* SettingsPageView.swift in Sources */,
 				27F292D72778A2E60083C949 /* HomePageView.swift in Sources */,
 				2764C6DE277F3BFC003346C1 /* AlertData.swift in Sources */,
+				27262E65278197FC004D6B6C /* Home.swift in Sources */,
+				27CDDBE12782F1D4003CBCB8 /* User.swift in Sources */,
 				27DAE570277893930083567A /* Home_ManagementApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
