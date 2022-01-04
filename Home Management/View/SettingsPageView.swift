@@ -83,7 +83,7 @@ struct SettingsPageView: View {
             }
             .navigationTitle(Text("Settings"))
         }
-        .onAppear {
+        .task {
             if (colorScheme == .dark) {
                 isDarkMode = true
             }
